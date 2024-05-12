@@ -1,3 +1,2 @@
-Id: 1 Name: Mishka Count: 10 Chanse: 25
-Id: 2 Name: Cat Count: 10 Chanse: 23
-Id: 3 Name: Dog Count: 10 Chanse: 25
+Id: 1 Name: Cat Count: 10 Chanse: 25
+Id: 2 Name: Dog Count: 10 Chanse: 25

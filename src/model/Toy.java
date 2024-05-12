@@ -1,8 +1,10 @@
 package model;
 
 import util.Validator;
+import java.util.List;
 
 public class Toy {
+    private List<Toy> toysList;
 
     private int id;
     private String toyName;
