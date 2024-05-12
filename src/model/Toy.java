@@ -1,6 +1,7 @@
 package model;
 
 import util.Validator;
+
 import java.util.List;
 
 public class Toy {
@@ -44,7 +45,7 @@ public class Toy {
         this.countToy = countToy;
     }
 
-    public int getChanse() {
+    public double getChanse() {
         return chanse;
     }
 
@@ -56,6 +57,28 @@ public class Toy {
     public String toString() {
         return String.format("Id: %d Name: %s Count: %d Chanse: %d\n", id, toyName, countToy, chanse);
     }
+
+    public Toy createToy(String[] args) {
+        Validator vl = new Validator();
+        Toy toy = new Toy();
+        toy.setId(vl.isId(args[0]));
+        toy.setToyName(args[1]);
+        toy.setCountToy(vl.isCount(args[2]));
+        toy.setChanse(vl.isChanse(args[3]));
+        return toy;
+    }
+
+    public void decreaseCountToy() {
+        countToy--;
+    }
+
+//    public Toy createToy(Toy toy){
+//        toy.setId(toy.getId());
+//        toy.setToyName(toy.getToyName());
+//        toy.setCountToy(getCountToy());
+//        toy.setChanse(toy.getChanse());
+//        return toy;
+//    }
 
     @Override
     public boolean equals(Object o) {
@@ -77,14 +100,6 @@ public class Toy {
 ////                && Integer.compare(this.getCountToy(), toysBase.getCountToy()) == 0;
     }
 
-    public Toy createToy(String[] args) {
-        Validator vl = new Validator();
-        Toy toy = new Toy();
-        toy.setId(vl.isId(args[0]));
-        toy.setToyName(args[1]);
-        toy.setCountToy(vl.isCount(args[2]));
-        toy.setChanse(vl.isChanse(args[3]));
-        return toy;
-    }
+
 
 }

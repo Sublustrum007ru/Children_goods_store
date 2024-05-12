@@ -1,3 +1,2 @@
-Id: 1 Name: Teddy_Bear Count: 9 Chanse: 30
-Id: 2 Name: Dollr Count: 14 Chanse: 30
-Id: 3 Name: Car Count: 19 Chanse: 40
+Id: 1 Name: Cat Count: 10 Chanse: 32
+Id: 2 Name: Dog Count: 16 Chanse: 25

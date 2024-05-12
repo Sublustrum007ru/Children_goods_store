@@ -75,4 +75,13 @@ public class Validator {
         }
         return Integer.parseInt(arg);
     }
+
+    public int isNumeric(String arg) {
+        try {
+            Integer.parseInt(arg);
+        } catch (NumberFormatException e) {
+            arg = view.prompt("Enter 'Count': ");
+        }
+        return Integer.parseInt(arg);
+    }
 }
