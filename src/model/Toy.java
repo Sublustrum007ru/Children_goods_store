@@ -4,7 +4,6 @@ import util.Validator;
 import java.util.List;
 
 public class Toy {
-    private List<Toy> toysList;
 
     private int id;
     private String toyName;
@@ -53,6 +52,7 @@ public class Toy {
         this.chanse = chanse;
     }
 
+
     public String toString() {
         return String.format("Id: %d Name: %s Count: %d Chanse: %d\n", id, toyName, countToy, chanse);
     }
@@ -79,11 +79,12 @@ public class Toy {
 
     public Toy createToy(String[] args) {
         Validator vl = new Validator();
-        setId(vl.isId(args[0]));
-        setToyName(args[1]);
-        setCountToy(vl.isCount(args[2]));
-        setChanse(vl.isChanse(args[3]));
-        return this;
+        Toy toy = new Toy();
+        toy.setId(vl.isId(args[0]));
+        toy.setToyName(args[1]);
+        toy.setCountToy(vl.isCount(args[2]));
+        toy.setChanse(vl.isChanse(args[3]));
+        return toy;
     }
 
 }

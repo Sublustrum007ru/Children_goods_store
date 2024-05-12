@@ -6,6 +6,7 @@ import util.View;
 import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 public class Application {
     private static final String ANSI_GREEN = "\u001B[32m";
@@ -15,6 +16,8 @@ public class Application {
 
     private final List<Toy> toyList = new ArrayList<>();
 
+    private final List<Toy> prizeToyList = new ArrayList<>();
+
     private final Validator vl = new Validator();
 
     private final View view = new View();
@@ -22,7 +25,7 @@ public class Application {
     private final Toy toys = new Toy();
 
 
-    public void run() throws IOException{
+    public void run() throws IOException {
         view.hello();
         File path = filePath.createFileName("store");
         filePath.readFile(path);
@@ -64,6 +67,7 @@ public class Application {
             e.printStackTrace();
         }
     }
+
 
     public void addToy(Toy toy) {
         toyList.add(toy);
