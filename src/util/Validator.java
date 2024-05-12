@@ -1,26 +1,25 @@
 package util;
 
-import model.toys.impl.Toy;
-
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.IOException;
+import model.Toy;
+import java.io.*;
 
 public class Validator {
+
+    private final String  filePathToy = "src/DB/store.txt";
 
     private View view = new View();
 
     private Toy toy = new Toy();
 
-    public boolean scheckToy(Toy newToy){
+    public boolean scheckToy(Toy newToy) throws FileNotFoundException {
         String line;
         int counter = 0;
-        try(BufferedReader in  = new BufferedReader(new FileReader("src/DB/store.txt"))){
-            while ((line = in.readLine()) != null) {
-                String[] temp = line.replace("Id:", "")
-                        .replace("Name:", "")
-                        .replace("Count:", "")
-                        .replace("Chanse:", "")
+        try(BufferedReader bf = new BufferedReader(new FileReader(filePathToy))){
+            while ((line = bf.readLine()) != null) {
+                String[] temp = line.replace("Id: ", "")
+                        .replace("Name: ", "")
+                        .replace("Count: ", "")
+                        .replace("Chanse: ", "")
                         .split(" ");
                 Toy tempToy = toy.createToy(temp);
                 if(newToy.equals(tempToy)){
@@ -36,30 +35,44 @@ public class Validator {
         return false;
     }
 
-    public String isId(String arg) {
-        try{
-            Integer.parseInt(arg);
-            return arg;
-        }catch(NumberFormatException e){
-            return arg = view.prompt("Enter 'Id': ");
+    public String[] scheckLine(String[] line) {
+        String[] result = new String[4];
+        if (line.length != 4) {
+            System.out.println("Введено не верное колличесвто данных");
+            String temp = view.prompt(("Повторите попытку: "));
+            line = temp.split(" ");
+            scheckLine(line);
         }
+        for (int i = 0; i < line.length; i++) {
+            result[i] = line[i];
+        }
+        return result;
     }
 
-    public String isCount(String arg) {
-        try{
+    public int isId(String arg) {
+        try {
             Integer.parseInt(arg);
-            return arg;
-        }catch(NumberFormatException e){
-            return arg = view.prompt("Enter 'count': ");
+        } catch (NumberFormatException e) {
+            arg = view.prompt("Enter 'Id': ");
         }
+        return Integer.parseInt(arg);
     }
 
-    public String isChanse(String arg){
-        try{
-            Double.parseDouble(arg);
-            return arg;
-        }catch(NumberFormatException e){
-            return arg = view.prompt("Enter 'chanse': ");
+    public int isCount(String arg) {
+        try {
+            Integer.parseInt(arg);
+        } catch (NumberFormatException e) {
+            arg = view.prompt("Enter 'count': ");
         }
+        return Integer.parseInt(arg);
+    }
+
+    public int isChanse(String arg) {
+        try {
+            Integer.parseInt(arg);
+        } catch (NumberFormatException e) {
+            arg = view.prompt("Enter 'chanse': ");
+        }
+        return Integer.parseInt(arg);
     }
 }

@@ -1,41 +1,42 @@
-import model.toys.impl.Toy;
+import model.Toy;
+import model.toys.impl.FileOperation;
 import util.Validator;
 import util.View;
 
 import java.io.*;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 public class Application {
+    private final FileOperation filePath = new FileOperation();
 
     private final List<Toy> toyList = new ArrayList<>();
 
     private final Validator vl = new Validator();
 
-    private View view = new View();
+    private final View view = new View();
 
-    private Toy toy = new Toy();
+    private final Toy toy = new Toy();
 
-    public void run() throws FileNotFoundException {
+
+    public void run() throws IOException {
         view.hello();
-//        String str = view.prompt("Введите данные: ");
-        String str = "1 Mishka 10 50";
-        Toy newToy = toy.createToy(str.split(" "));
-        if(vl.scheckToy(newToy)){
-            try(FileWriter fr = new FileWriter("src/DB/store.txt", true)){
+        File path = filePath.createFileName("store");
+        filePath.readFile(path);
+        String str = view.prompt("Введите данные игрушки (Id, Name, Сount, Сhanse) через пробел: ");
+//        String str = "1 Mishka 10 25";
+        String[] line = vl.scheckLine(str.split(" "));
+        Toy newToy = toy.createToy(line);
+        if (vl.scheckToy(newToy)) {
+            try (FileWriter fr = new FileWriter(path, true)) {
                 fr.write(String.valueOf(newToy));
                 fr.flush();
-                System.out.println("Запись добавлена!");
-            }catch (IOException e){
+                System.out.println("Игрушка добавлена!");
+            } catch (IOException e) {
                 e.printStackTrace();
             }
-            toyList.add(newToy);
-        }else{
-            System.out.println("Идентичная запись уже существует");
-        }
-        for (int i = 0; i < toyList.size(); i++) {
-            System.out.println(toyList.get(i));
+        } else {
+            System.out.println("Игрушка с идентичными данными уже существует!");
         }
     }
 
