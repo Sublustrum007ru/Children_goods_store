@@ -1,5 +1,6 @@
 import model.Toy;
 import model.toys.impl.FileOperation;
+import org.w3c.dom.ls.LSOutput;
 import util.Validator;
 import util.View;
 
@@ -32,7 +33,7 @@ public class Application {
         createToyList(path);
 
 //        String str = view.prompt(ANSI_GREEN + "Введите данные игрушки (Id, Name, Сount, Сhanse) через пробел: " + ANSI_RESET);
-        String str = "2 Dog 10 25";
+        String str = "3 Car 19 40";
         String[] line = vl.scheckLine(str.split(" "));
 
         Toy newToy = toys.createToy(line);
@@ -48,8 +49,11 @@ public class Application {
         } else {
             System.out.println(ANSI_RED + "Игрушка с идентичными данными уже существует!" + ANSI_RESET);
         }
-        System.out.println("Вывод toyList");
-        System.out.println(toyList);
+        playToy();
+    }
+
+    public void playToy() {
+
     }
 
     public void createToyList(File path) throws IOException {
@@ -67,7 +71,6 @@ public class Application {
             e.printStackTrace();
         }
     }
-
 
     public void addToy(Toy toy) {
         toyList.add(toy);
